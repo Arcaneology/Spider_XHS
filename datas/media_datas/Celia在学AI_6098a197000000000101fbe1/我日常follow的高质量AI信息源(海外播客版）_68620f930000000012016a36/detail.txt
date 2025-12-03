@@ -1,0 +1,27 @@
+笔记id: 68620f930000000012016a36
+笔记url: https://www.xiaohongshu.com/explore/68620f930000000012016a36?xsec_token=ABSKMpFKyVQVZIi-ivdL7KXOQpHY8xsp18hyTQcEptWbw=
+笔记类型: 图集
+用户id: 6098a197000000000101fbe1
+用户主页url: https://www.xiaohongshu.com/user/profile/6098a197000000000101fbe1
+昵称: Celia在学AI
+头像url: https://sns-avatar-qc.xhscdn.com/avatar/1040g2jo31j85k74mj6005o4ok6bgbuv1ji4srb0
+标题: 我日常follow的高质量AI信息源(海外播客版）
+描述: 作为一个重度播客脑袋 (累计收听时长 3000+h) 和半个 AI 播客制作人，我最羡慕海外内容生态的一点就是顶尖人才真的非常愿意分享，每周都会有像 Andrej Karpathy、Ilya sutskever 这种大神级的 AI 从业者出来分享他们看到了什么前沿的模型进展或者产品思路，在前瞻性上往往比国内访谈领先太多。
+	
+这三年大概 mapping 了 50+ 个科技、AI 类的播客，最后筛出了这 15 个质量最高、最值得 follow 的，开源出来分享一下。
+	
+我的 routine 一般是用 podwise 订阅和管理所有英文播客，每天早上查看一下最新的单集，然后挑感兴趣的加到播放列表里，白天再利用吃饭、通勤的碎片时间听完，感觉每天都在见缝插针地跟顶尖 AI 从业者开电话会议，有种足不出户但灵魂可以在硅谷各个咖啡馆间巡游的快乐
+	
+(P.S. 附图是一个精选版的 playing list，如果想要一个我司完整的播客订阅列表也欢迎评论区留言)
+	
+#播客[话题]# #大模型[话题]# #AI工具[话题]# #人工智能发展[话题]# #ai[话题]#
+点赞数量: 2084
+收藏数量: 3587
+评论数量: 64
+分享数量: 459
+视频封面url: None
+视频地址url: None
+图片地址url列表: ['http://sns-webpic-qc.xhscdn.com/202511160111/554f3381b18df641720bf4be5a4f4ede/notes_pre_post/1040g3k831jbe94u72a105o4ok6bgbuv12d4q050!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160111/88a45260072434a19d9d9cdaf5f100ee/notes_pre_post/1040g3k831jbe94u72a1g5o4ok6bgbuv100h36s0!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160111/7f076f3017db4150e3d0ec00d11fbabc/notes_pre_post/1040g3k831jbe94u72a205o4ok6bgbuv1aatsvkg!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160111/fefb0a8e13a09bd9b9a72672b98353c3/notes_pre_post/1040g3k831jbe94u72a2g5o4ok6bgbuv1thn8h00!nd_dft_wlteh_webp_3']
+标签: ['播客', '大模型', 'AI工具', '人工智能发展', 'ai']
+上传时间: 2025-06-30 12:16:19
+ip归属地: 未知

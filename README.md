@@ -6,7 +6,6 @@
   </a>
 </p>
 
-
 <div align="center">
     <a href="https://www.python.org/">
         <img src="https://img.shields.io/badge/python-3.7%2B-blue" alt="Python 3.7+">
@@ -16,121 +15,60 @@
     </a>
 </div>
 
-
-
 # Spider_XHS
 
-**✨ 专业的小红书数据采集解决方案，支持笔记爬取，保存格式为excel或者media**
+本仓库在原项目基础上补充了桌面图形界面（Tkinter），便于非命令行用户配置 Cookies、输出目录和搜索/下载参数。核心爬虫能力保持不变。
 
-**✨ 小红书全域运营解决方法，AI一键改写笔记（图文，视频）直接上传**
+## 功能概览（原项目精简版）
+- 小红书 PC：二维码/手机号登录，笔记图文和视频无水印下载，用户主页/喜欢/收藏/评论/消息等数据获取。
+- 创作者平台：二维码/验证码登录，作品上传（图集、视频）及自有作品查看。
+- 数据输出：媒体文件按目录落盘，笔记元数据可导出为 Excel，支持代理与简单频率控制。
 
-## ⭐功能列表
-
-**⚠️ 任何涉及数据注入的操作都是不被允许的，本项目仅供学习交流使用，如有违反，后果自负**
-
-| 模块           | 已实现                                                                             |
-|---------------|---------------------------------------------------------------------------------|
-| 小红书创作者平台 | ✅ 二维码登录<br/>✅ 手机验证码登录<br/>✅ 上传（图集、视频）作品<br/>✅查看自己上传的作品      |
-|    小红书PC    | ✅ 二维码登录<br/> ✅ 手机验证码登录<br/> ✅ 获取无水印图片<br/> ✅ 获取无水印视频<br/> ✅ 获取主页的所有频道<br/>✅ 获取主页推荐笔记<br/>✅ 获取某个用户的信息<br/>✅ 用户自己的信息<br/>✅ 获取某个用户上传的笔记<br/>✅ 获取某个用户所有的喜欢笔记<br/>✅ 获取某个用户所有的收藏笔记<br/>✅ 获取某个笔记的详细内容<br/>✅ 搜索笔记内容<br/>✅ 搜索用户内容<br/>✅ 获取某个笔记的评论<br/>✅ 获取未读消息信息<br/>✅ 获取收到的评论和@提醒信息<br/>✅ 获取收到的点赞和收藏信息<br/>✅ 获取新增关注信息|
-
-
-## 🌟 功能特性
-
-- ✅ **多维度数据采集**
-  - 用户主页信息
-  - 笔记详细内容
-  - 智能搜索结果抓取
-- 🚀 **高性能架构**
-  - 自动重试机制
-- 🔒 **安全稳定**
-  - 小红书最新API适配
-  - 异常处理机制
-  - proxy代理
-- 🎨 **便捷管理**
-  - 结构化目录存储
-  - 格式化输出（JSON/EXCEL/MEDIA）
-  
-## 🎨效果图
-### 处理后的所有用户
-![image](https://github.com/cv-cat/Spider_XHS/assets/94289429/00902dbd-4da1-45bc-90bb-19f5856a04ad)
-### 某个用户所有的笔记
-![image](https://github.com/cv-cat/Spider_XHS/assets/94289429/880884e8-4a1d-4dc1-a4dc-e168dd0e9896)
-### 某个笔记具体的内容
-![image](https://github.com/cv-cat/Spider_XHS/assets/94289429/d17f3f4e-cd44-4d3a-b9f6-d880da626cc8)
-### 保存的excel
-![image](https://github.com/user-attachments/assets/707f20ed-be27-4482-89b3-a5863bc360e7)
-
-## 🛠️ 快速开始
-### ⛳运行环境
+## 环境要求
 - Python 3.7+
-- Node.js 18+
+- Node.js 18+（`PyExecJS` 调用 `static/*.js` 时需要）
+- （可选）Docker 24+
 
-### 🎯安装依赖
+## 安装依赖
 ```
 pip install -r requirements.txt
 npm install
 ```
 
-### 🎨配置文件
-配置文件在项目根目录.env文件中，将下图自己的登录cookie放入其中，cookie获取➡️在浏览器f12打开控制台，点击网络，点击fetch，找一个接口点开
-![image](https://github.com/user-attachments/assets/6a7e4ecb-0432-4581-890a-577e0eae463d)
+## 配置 Cookies
+在项目根目录创建或编辑 `.env`，写入浏览器抓到的登录后 Cookies：
+```
+COOKIES="your_cookie_string"
+```
+启动 GUI 后也可以用“读取 Cookies / 保存 Cookies”按钮与 `.env` 互相同步（不会保存到 git）。
 
-复制cookie到.env文件中（注意！登录小红书后的cookie才是有效的，不登陆没有用）
-![image](https://github.com/user-attachments/assets/5e62bc35-d758-463e-817c-7dcaacbee13c)
+## 启动桌面版
+```
+python -m gui_app
+```
+打开后即可在窗口内完成全部配置和任务下发。
 
-### 🚀运行项目
+### 界面说明
+- **全局配置**：输入 Cookies，设置媒体输出目录、Excel 输出目录、可选代理；可配置频率限制（每 10 分钟最大请求数、单次最小间隔）与全局笔记数量上限。关闭窗口会把非 Cookies 配置保存在 `gui_settings.json` 供下次启动使用。
+- **批量笔记**：每行粘贴一个笔记链接，选择保存模式（all/media/media-video/media-image/excel）和 Excel 文件名，点击“开始下载”。
+- **用户全集**：填写用户主页 URL，可选 Excel 名称与页面下拉次数（0 为不限），点击“获取所有笔记”。
+- **搜索下载**：输入关键词和数量，选择排序、笔记类型/时间/范围、位置筛选（同城/附近需填写经纬度），选择保存模式后点击“执行搜索并下载”。
+- **日志与任务**：下方“运行日志”实时显示进度；有任务执行时会阻止重复启动。
+
+## 命令行运行（保留）
+配置好 `.env` 后可直接运行默认流程：
 ```
 python main.py
 ```
 
-### 🗝️注意事项
-- main.py中的代码是爬虫的入口，可以根据自己的需求进行修改
-- apis/xhs_pc_apis.py 中的代码包含了所有的api接口，可以根据自己的需求进行修改
-- apis/xhs_creator_apis.py 中的代码包含了小红书创作者平台的api接口，可以根据自己的需求进行修改
+## Docker（可选）
+```
+docker build -t spider_xhs .
+docker run --env-file .env spider_xhs
+```
 
-
-## 🍥日志
-   
-| 日期       | 说明                                        |
-|----------|-------------------------------------------|
-| 23/08/09 | - 首次提交                                    |
-| 23/09/13 | - api更改params增加两个字段，修复图片无法下载，有些页面无法访问导致报错 |
-| 23/09/16 | - 较大视频出现编码问题，修复视频编码问题，加入异常处理              |
-| 23/09/18 | - 代码重构，加入失败重试                             |
-| 23/09/19 | - 新增下载搜索结果功能                              |
-| 23/10/05 | - 新增跳过已下载功能，获取更详细的笔记和用户信息                 |
-| 23/10/08 | - 上传代码☞Pypi，可通过pip install安装本项目           |
-| 23/10/17 | - 搜索下载新增排序方式选项（1、综合排序 2、热门排序 3、最新排序）      |
-| 23/10/21 | - 新增图形化界面,上传至release v2.1.0               |
-| 23/10/28 | - Fix Bug 修复搜索功能出现的隐藏问题                   |
-| 25/03/18 | - 更新API，修复部分问题                            |
-| 25/06/07 | - 更新search接口，区分视频和图集下载，增加小红书创作者api        |
-| 25/07/15 | - 更新 xs version56 & 小红书创作者接口              |
-
-
-## 🧸额外说明
-1. 感谢star⭐和follow📰！不时更新
-2. 作者的联系方式在主页里，有问题可以随时联系我
-3. 可以关注下作者的其他项目，欢迎 PR 和 issue
-4. 感谢赞助！如果此项目对您有帮助，请作者喝一杯奶茶~~ （开心一整天😊😊）
-5. thank you~~~
-
-<div align="center">
-  <img src="./author/wx_pay.png" width="400px" alt="微信赞赏码"> 
-  <img src="./author/zfb_pay.jpg" width="400px" alt="支付宝收款码">
-</div>
-
-
-## 📈 Star 趋势
-<a href="https://www.star-history.com/#cv-cat/Spider_XHS&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=cv-cat/Spider_XHS&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=cv-cat/Spider_XHS&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=cv-cat/Spider_XHS&type=Date" />
- </picture>
-</a>
-
-## 🍔 交流群
-<img width="1031" height="1449" alt="5355a0f82398ee2052f2e659328d737b" src="https://github.com/user-attachments/assets/ea690f33-0c5f-4941-9332-de9feff838e7" />
+## 提示
+- 请勿提交真实 Cookies 或代理信息到仓库。
+- 下载/上传行为需遵守平台规则，示例配置仅供学习测试。
 
 

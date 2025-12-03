@@ -1,0 +1,39 @@
+笔记id: 690ff89e0000000007014e3b
+笔记url: https://www.xiaohongshu.com/explore/690ff89e0000000007014e3b?xsec_token=ABY81PFfMerALwLgxCo5zD-TZsSrhe26UK7fDmYtMp5HU=
+笔记类型: 图集
+用户id: 60ab58650000000001006930
+用户主页url: https://www.xiaohongshu.com/user/profile/60ab58650000000001006930
+昵称: 之之Edison
+头像url: https://sns-avatar-qc.xhscdn.com/avatar/1040g2jo31n8do8p6l0005o5bb1ig8q9ggve75n8
+标题: 油管大神Dan Koe分享：用AI打造爆款生产线
+描述: Dan Koe是一位靠写作和思维分享起家的全职创作者，每天仅用2小时写内容，就打造出超过 300 万粉丝的个人品牌。
+	
+你可能听过他的播客，或者看过他的推文，又或者在小红书上刷到各种关于他的帖子。他的生活理念也非常吸引人：Work less，Earn More， Enjoy Life（少工作，多赚钱，享受生活）。
+	
+上个月Dan Koe接受了油管博主Greg Isenberg的采访，在长达50分钟的视频里，详细拆解了自己的完整的内容创作流程，还展示了他如何借助 AI 工具，实现几乎“自动化”的爆款生产线。
+	
+看完的反应是，这家伙完全是在用「手术刀」解剖内容，他不靠灵感，而是用一整套能打的逻辑去拆解、复制、在创造。我觉得对所有做IP和做自媒体的人来说都很有帮助。
+	
+Greg Isenberg 后来把这次采访整理成了文字指南。我完整看完一遍，觉得信息量太大、太有价值了，于是决定一字一句翻译，做了这份完整中文版。
+	
+在这份指南中，你会看到：
+	
+· Dan Koe 是如何围绕爆款搭建灵感库的
+· Dan Koe 是如何用「三层提示词系统」创作的
+· Dan Koe 是如何将一份内容做成不同形式分发到各大平台的
+	
+另外我也在末尾加了一页关于如何在小红书落地这套体系的思考，希望能帮助到更多想做自媒体的人，一同进步。
+	
+祝大家少工作，多赚钱，享受生活。
+	
+#自我提升[话题]# #自我成长[话题]# #油管大神[话题]# #内容创作[话题]# #认知进化[话题]# #成长思维[话题]# #深度思考[话题]# #高效生产力[话题]# #AI工具[话题]# #生产力提升[话题]#
+点赞数量: 1040
+收藏数量: 1826
+评论数量: 39
+分享数量: 437
+视频封面url: None
+视频地址url: None
+图片地址url列表: ['http://sns-webpic-qc.xhscdn.com/202511160111/be750a64f635239cb7ebfcab75df8839/1040g00831old3toe4s005o5bb1ig8q9gn9g79oo!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160111/fd8cca35d55de7139dab1ff8562e5035/notes_pre_post/1040g3k031ol95i2sks105o5bb1ig8q9gr5moogg!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160111/1fb82fca8fcd6c3d4ac0a39faebe91bb/notes_pre_post/1040g3k031ol95i2sks1g5o5bb1ig8q9gsmln26o!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160111/519d0dcca1c361d6dd58afd4ae321b10/notes_pre_post/1040g3k031ol95i2sks205o5bb1ig8q9gub9tve8!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160111/2426265aef917ca60a7a813764f29bd2/notes_pre_post/1040g3k031ol95i2sks2g5o5bb1ig8q9go0uu3og!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160111/52e806b3f2ba44490ada59647e0d6044/notes_pre_post/1040g3k031ol95i2sks305o5bb1ig8q9g2up0nv0!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160111/26f15d07c07549d3c0844112334f1ffa/notes_pre_post/1040g3k031ol95i2sks3g5o5bb1ig8q9gbl08dn8!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160111/af1a7c168d53de4f9a52d7d0a4b0fe24/notes_pre_post/1040g3k031ol95i2sks405o5bb1ig8q9gbb8jneo!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160111/cd4a6cf7e1e05c54645997f54224e030/notes_pre_post/1040g3k031ol95i2sks4g5o5bb1ig8q9gipu02q8!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160111/4ae2dd41a19180b091384196e1fec270/notes_pre_post/1040g3k031ol95i2sks505o5bb1ig8q9g4ohbikg!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160111/39022a06eaf4b0bfaf41f2c1fea9de98/notes_pre_post/1040g3k031ol95i2sks5g5o5bb1ig8q9g67hma1o!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160111/dfeb48b26a3003f51f6f1e5dccde5626/notes_pre_post/1040g3k031ol95i2sks605o5bb1ig8q9gj5vjhh0!nd_dft_wlteh_webp_3']
+标签: ['自我提升', '自我成长', '油管大神', '内容创作', '认知进化', '成长思维', '深度思考', '高效生产力', 'AI工具', '生产力提升']
+上传时间: 2025-11-09 10:12:46
+ip归属地: 美国

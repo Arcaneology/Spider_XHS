@@ -1,0 +1,21 @@
+笔记id: 6913c24f0000000007015c07
+笔记url: https://www.xiaohongshu.com/explore/6913c24f0000000007015c07?xsec_token=ABLKl0Ph6NLGxCryh6tqKABdnQQOJyJr-YUCc35dl-4Is=
+笔记类型: 图集
+用户id: 60e7071c000000000101c61a
+用户主页url: https://www.xiaohongshu.com/user/profile/60e7071c000000000101c61a
+昵称: 团小暖日记
+头像url: https://sns-avatar-qc.xhscdn.com/avatar/1040g2jo31kodvd1b2g005o770se0bhgqdmd4eu8
+标题: 李飞飞：AI的下一个十年，不是ChatGPT
+描述: ChatGPT擅长语言，但理解物理世界能力不足。李飞飞提出“空间智能”是AI 2.0的核心，强调生成性、多模态性和交互性。她创立World Labs，开发Marble，推动AI向三维世界理解发展。
+#AI[话题]# #人工智能[话题]# #空间智能[话题]# #李飞飞[话题]# #ChatGPT[话题]#
+#世界模型[话题]# #机器人[话题]# #科技[话题]# #未来[话题]# #深度学习[话题]#
+点赞数量: 1016
+收藏数量: 1125
+评论数量: 165
+分享数量: 612
+视频封面url: None
+视频地址url: None
+图片地址url列表: ['http://sns-webpic-qc.xhscdn.com/202511160110/ade75212eb55ca82595dadd06167ae55/1040g00831ooveq2b4s005o770se0bhgq7lois6g!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160110/e246b5a9da5f76b7c9590336c1361b90/1040g00831ooveq2b4s305o770se0bhgqdoqm4u0!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160110/e8d072f65bd23d5e2bd69db7d6e940d6/1040g00831ooveq2b4s1g5o770se0bhgqhaicgc8!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160110/471bc8e0cee272ba5a005318bd6070d0/1040g00831ooveq2b4s105o770se0bhgqa28uono!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160110/13566474be1b1bba411e5c94e42e1349/1040g00831ooveq2b4s205o770se0bhgqg9rt6e0!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160110/2b54a5dc9d8e8a39dec0b99f593d8785/1040g00831ooveq2b4s0g5o770se0bhgq1gjbrhg!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160110/46dfc3c06644c5698595c92a71ac6089/1040g00831ooveq2b4s3g5o770se0bhgqkmes4n8!nd_dft_wlteh_webp_3', 'http://sns-webpic-qc.xhscdn.com/202511160110/84aca1581fedc7e46ee406d60feefbde/1040g00831ooveq2b4s2g5o770se0bhgqija325o!nd_dft_wlteh_webp_3']
+标签: ['AI', '人工智能', '空间智能', '李飞飞', 'ChatGPT', '世界模型', '机器人', '科技', '未来', '深度学习']
+上传时间: 2025-11-12 07:10:07
+ip归属地: 北京

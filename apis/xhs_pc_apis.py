@@ -172,7 +172,6 @@ class XHS_Apis():
         """
         res_json = None
         try:
-            api = f"/api/sns/web/v1/user_posted"
             params = {
                 "num": "30",
                 "cursor": cursor,
@@ -181,11 +180,74 @@ class XHS_Apis():
                 "xsec_token": xsec_token,
                 "xsec_source": xsec_source,
             }
-            splice_api = splice_str(api, params)
-            headers, cookies, data = generate_request_params(cookies_str, splice_api)
-            response = requests.get(self.base_url + splice_api, headers=headers, cookies=cookies, proxies=proxies)
-            res_json = response.json()
-            success, msg = res_json["success"], res_json["msg"]
+
+            # 先尝试 v2 接口，再回退到 v1
+            last_status = None
+            last_preview = None
+
+            for api in ["/api/sns/web/v2/user_posted", "/api/sns/web/v1/user_posted"]:
+                splice_api = splice_str(api, params)
+                # 生成签名时仅使用路径，不带查询参数，尽量贴近浏览器行为
+                headers, cookies, data = generate_request_params(cookies_str, api)
+                response = requests.get(self.base_url + splice_api, headers=headers, cookies=cookies, proxies=proxies)
+                last_status = response.status_code
+
+                try:
+                    res_json = response.json()
+                except Exception as e:
+                    success = False
+                    msg = f"解析 JSON 失败: api={api}, status={response.status_code}, error={e}"
+                    logger.error(
+                        f"get_user_note_info 响应非 JSON: user_id={user_id}, cursor={cursor}, "
+                        f"api={api}, status={response.status_code}, error={e}"
+                    )
+                    continue
+
+                if "success" in res_json:
+                    success = res_json.get("success", False)
+                    msg = res_json.get("msg", "") or ""
+                elif "code" in res_json:
+                    success = res_json.get("code") == 0
+                    msg = res_json.get("msg") or res_json.get("message", "") or ""
+                else:
+                    success = False
+                    msg = f"响应数据缺少 success/code 字段，api={api}, status={response.status_code}"
+                    logger.error(
+                        f"get_user_note_info 返回结构异常: user_id={user_id}, cursor={cursor}, "
+                        f"api={api}, status={response.status_code}, body_keys={list(res_json.keys())}"
+                    )
+
+                try:
+                    last_preview = {k: res_json.get(k) for k in list(res_json.keys())[:5]}
+                except Exception:
+                    last_preview = res_json
+
+                if success:
+                    if api.endswith("/v2/user_posted"):
+                        logger.info(
+                            f"get_user_note_info 使用 v2 接口成功: user_id={user_id}, cursor={cursor}, "
+                            f"status={response.status_code}"
+                        )
+                    return success, msg, res_json
+
+                # v2 失败再试 v1，其它情况直接跳出循环
+                if api.endswith("/v2/user_posted"):
+                    logger.warning(
+                        f"get_user_note_info v2 接口返回失败，将尝试回退到 v1: "
+                        f"user_id={user_id}, cursor={cursor}, status={response.status_code}, msg={msg}, preview={last_preview}"
+                    )
+                    continue
+                else:
+                    # v1 也失败，结束循环
+                    break
+
+            # 走到这里说明 v2/v1 都失败了
+            if not msg:
+                msg = "接口返回 success=False 且未提供错误信息"
+            logger.error(
+                f"get_user_note_info 接口返回失败: user_id={user_id}, cursor={cursor}, "
+                f"status={last_status}, msg={msg}, preview={last_preview}"
+            )
         except Exception as e:
             success = False
             msg = str(e)
@@ -195,34 +257,117 @@ class XHS_Apis():
     def get_user_all_notes(self, user_url: str, cookies_str: str, proxies: dict = None):
         """
            获取用户所有笔记
-           :param user_id: 你想要获取的用户的id
+           :param user_url: 用户主页的完整链接（建议直接从浏览器复制）
            :param cookies_str: 你的cookies
            返回用户的所有笔记
         """
-        cursor = ''
+        cursor = ""
         note_list = []
+        success = True
+        msg = ""
         try:
-            urlParse = urllib.parse.urlparse(user_url)
-            user_id = urlParse.path.split("/")[-1]
-            kvs = urlParse.query.split('&')
-            kvDist = {kv.split('=')[0]: kv.split('=')[1] for kv in kvs}
-            xsec_token = kvDist['xsec_token'] if 'xsec_token' in kvDist else ""
-            xsec_source = kvDist['xsec_source'] if 'xsec_source' in kvDist else "pc_search"
+            url_parse = urllib.parse.urlparse(user_url)
+
+            if "/user/profile/" not in url_parse.path:
+                success = False
+                msg = (
+                    f"user_url 不是用户主页链接，请使用形如 "
+                    f"\"https://www.xiaohongshu.com/user/profile/用户ID?...\" 的地址: {user_url}"
+                )
+                logger.error(
+                    f"get_user_all_notes 收到非用户主页链接: path={url_parse.path}, url={user_url}"
+                )
+                return success, msg, note_list
+
+            user_id = url_parse.path.rstrip("/").split("/")[-1]
+
+            if not user_id:
+                raise ValueError(f"无法从 user_url 解析出 user_id: {user_url}")
+
+            kv_dist = {}
+            if url_parse.query:
+                for kv in url_parse.query.split("&"):
+                    if "=" in kv:
+                        key, value = kv.split("=", 1)
+                        kv_dist[key] = value
+                    else:
+                        logger.warning(f"user_url query 片段格式异常，已忽略: segment={kv!r}, url={user_url}")
+            else:
+                logger.warning(f"user_url 未包含查询参数（无 xsec_token/xsec_source），将使用默认值: {user_url}")
+
+            xsec_token = kv_dist.get("xsec_token", "")
+            xsec_source = kv_dist.get("xsec_source", "pc_user")
+
+            if not xsec_token:
+                logger.warning(f"user_url 中缺少 xsec_token，将使用空 token 调用接口: {user_url}")
+
             while True:
-                success, msg, res_json = self.get_user_note_info(user_id, cursor, cookies_str, xsec_token, xsec_source, proxies)
+                success, msg, res_json = self.get_user_note_info(
+                    user_id, cursor, cookies_str, xsec_token, xsec_source, proxies
+                )
                 if not success:
-                    raise Exception(msg)
-                notes = res_json["data"]["notes"]
-                if 'cursor' in res_json["data"]:
-                    cursor = str(res_json["data"]["cursor"])
-                else:
+                    fallback_used = False
+                    # 针对部分场景，pc_search 容易触发 406，这里尝试回退为 pc_user 再请求一次
+                    if (
+                        cursor == ""
+                        and xsec_source != "pc_user"
+                        and isinstance(res_json, dict)
+                        and res_json.get("code") == -1
+                    ):
+                        logger.warning(
+                            f"get_user_note_info 首次调用失败，尝试使用 xsec_source=pc_user 重新请求: "
+                            f"user_id={user_id}, cursor={cursor}, origin_source={xsec_source}"
+                        )
+                        fallback_used = True
+                        xsec_source_backup = xsec_source
+                        xsec_source = "pc_user"
+                        success, msg, res_json = self.get_user_note_info(
+                            user_id, cursor, cookies_str, xsec_token, xsec_source, proxies
+                        )
+                        if not success:
+                            logger.error(
+                                f"get_user_note_info 回退为 pc_user 仍然失败: user_id={user_id}, cursor={cursor}, "
+                                f"origin_source={xsec_source_backup}, msg={msg}"
+                            )
+                            break
+
+                    if not success and not fallback_used:
+                        logger.error(
+                            f"get_user_note_info 调用失败: user_id={user_id}, cursor={cursor}, "
+                            f"xsec_source={xsec_source}, msg={msg}"
+                        )
+                        break
+
+                data = res_json.get("data", {})
+                notes = data.get("notes", [])
+                if not isinstance(notes, list):
+                    logger.error(
+                        f"get_user_note_info 返回数据格式异常，未找到 notes 列表: "
+                        f"user_id={user_id}, cursor={cursor}"
+                    )
+                    success = False
+                    msg = "响应数据格式异常，缺少 notes 列表"
                     break
+
                 note_list.extend(notes)
-                if len(notes) == 0 or not res_json["data"]["has_more"]:
+
+                if "cursor" in data:
+                    cursor = str(data["cursor"])
+                else:
+                    logger.info(
+                        f"用户 {user_id} 全集爬取结束：响应中无 cursor 字段，累计 {len(note_list)} 条笔记"
+                    )
+                    break
+
+                if len(notes) == 0 or not data.get("has_more", False):
+                    logger.info(
+                        f"用户 {user_id} 全集爬取结束：has_more=False 或本次无新笔记，累计 {len(note_list)} 条笔记"
+                    )
                     break
         except Exception as e:
             success = False
             msg = str(e)
+            logger.error(f"get_user_all_notes 执行异常: url={user_url}, error={e}")
         return success, msg, note_list
 
     def get_user_like_note_info(self, user_id: str, cursor: str, cookies_str: str, xsec_token='', xsec_source='', proxies: dict = None):
@@ -363,8 +508,14 @@ class XHS_Apis():
         try:
             urlParse = urllib.parse.urlparse(url)
             note_id = urlParse.path.split("/")[-1]
-            kvs = urlParse.query.split('&')
-            kvDist = {kv.split('=')[0]: kv.split('=')[1] for kv in kvs}
+
+            kv_dist = {}
+            if urlParse.query:
+                for kv in urlParse.query.split("&"):
+                    if "=" in kv:
+                        key, value = kv.split("=", 1)
+                        kv_dist[key] = value
+
             api = f"/api/sns/web/v1/feed"
             data = {
                 "source_note_id": note_id,
@@ -376,9 +527,12 @@ class XHS_Apis():
                 "extra": {
                     "need_body_topic": "1"
                 },
-                "xsec_source": kvDist['xsec_source'] if 'xsec_source' in kvDist else "pc_search",
-                "xsec_token": kvDist['xsec_token']
+                "xsec_source": kv_dist.get("xsec_source", "pc_user"),
             }
+            # 仅当 URL 中显式提供 xsec_token 时才附加，避免因缺失字段直接异常
+            if "xsec_token" in kv_dist:
+                data["xsec_token"] = kv_dist["xsec_token"]
+
             headers, cookies, data = generate_request_params(cookies_str, api, data)
             response = requests.post(self.base_url + api, headers=headers, data=data, cookies=cookies, proxies=proxies)
             res_json = response.json()
